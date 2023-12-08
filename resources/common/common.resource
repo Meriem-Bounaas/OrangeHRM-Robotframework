@@ -39,3 +39,7 @@ Wait and click element
     Wait Until Element Is Visible    locator=${locator}    timeout=${timeout}
     Wait Until Element Is Enabled    locator=${locator}    timeout=${timeout}
     Click Element    ${locator}
+
+verify header of my info page
+    [Arguments]    ${locator}    ${text}
+    Element Text Should Be    locator=${locator}    expected=${text}
