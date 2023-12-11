@@ -30,5 +30,3 @@ Test Insert Employee Informations OK
     myInfoPage.verify form contact details
     myInfoPage.insert city and ZIP code and email
     myInfoPage.verify toaster success
-
-

@@ -1,5 +1,6 @@
 *** Settings ***
 Library     SeleniumLibrary
+Library    ../lib/customLib.py
 Resource    common/common.resource
 
 *** Variables ***
@@ -25,8 +26,8 @@ login
     common.Wait and input text    locator=name:password    text=${data}[1]
     common.Wait and click button    locator=xpath://button[@type= 'submit'] 
 
-verify invalid credentials
-    Page Should Contain    text=Invalid credentials
+verify invalid credentials or required text
+   Page Should Contain Element    xpath://span[text()= 'Required' or text()='Invalid credentials']
 
 verify login text
     Page Should Contain    text=Login

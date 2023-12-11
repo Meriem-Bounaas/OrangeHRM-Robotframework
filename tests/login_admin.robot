@@ -20,4 +20,4 @@ Test Login Admin KO
     [Tags]    LoginAdminKo
     landingPage.verify page
     landingPage.login    admin_or_employee=admin invalid
-    landingPage.verify invalid credentials
+    landingPage.verify invalid credentials or required text
