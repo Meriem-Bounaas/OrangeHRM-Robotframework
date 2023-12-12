@@ -70,3 +70,32 @@ add employee invalid
 
 verify required text
     Page Should Contain    text=Required
+
+search employee by id
+    @{employee_informations_in_csv}    Search Employee
+    common.Wait and click element    locator=xpath://*[@type='reset']
+    common.Wait and input text    locator=xpath://label[text() = 'Employee Id']/parent::div/following-sibling::div/input    text=${employee_informations_in_csv}[0]
+    common.Wait and click element    locator=xpath://*[@type='submit']
+    Sleep    2
+    [return]    @{employee_informations_in_csv}
+        
+verify existence of one employee
+    [Arguments]    @{employee_informations}
+    @{employee_informations_in_search_table}    Get WebElements    locator=xpath://*[@class='oxd-table-card']
+    @{employee_informations_list}    Split Employee Informations Table    employees_table=@{employee_informations_in_search_table}
+    Length Should Be    item=${employee_informations_in_search_table}    length=1    
+    Should Be Equal    first=${employee_informations_list}[0]    second=${employee_informations}[0]
+    Should Be Equal    first=${employee_informations_list}[1]    second=${employee_informations}[1]
+    Should Be Equal    first=${employee_informations_list}[2]    second=${employee_informations}[2]
+
+update id employee
+    ${id_genere}    Generate Id   
+    common.Wait and click element    locator=xpath://*[@class='oxd-icon bi-pencil-fill']
+    Sleep    2
+    ${old_id_employee}    Get Value    locator=xpath://label[text() = 'Employee Id']/parent::div/following-sibling::div/input
+    common.Wait and input text    locator=xpath://label[text() = 'Employee Id']/parent::div/following-sibling::div/input    text=${id_genere}
+    ${new_id_employee}    Get Value    locator=xpath://label[text() = 'Employee Id']/parent::div/following-sibling::div/input
+    @{save_button_list}    Get WebElements    locator=xpath://button[@type='submit']
+    Scroll Element Into View    locator=${save_button_list}[0]
+    common.Wait and click button    locator=${save_button_list}[0]
+    Update Id Employee In Csv File    ${old_id_employee}    ${new_id_employee}    
